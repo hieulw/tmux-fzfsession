@@ -110,7 +110,7 @@ get_fzf_results() {
 			get_sessions_by_mru
 			;;
 		zoxide)
-			get_zoxide_results
+				get_zoxide_results
 			;;
 		*)
 			get_sessions_by_mru && get_zoxide_results # default shows both
@@ -122,7 +122,10 @@ get_fzf_results() {
 }
 
 fzf_border_label_default=' t - smart tmux session manager '
-BORDER_LABEL=${T_FZF_BORDER_LABEL:-$fzf_border_label_default}
+BORDER_LABEL=$(tmux show-option -gvq "@t-border-label")
+if [ "$BORDER_LABEL" = "" ]; then
+	BORDER_LABEL=$fzf_border_label_default
+fi
 
 HEADER=" ^s sessions ^x zoxide ^f find"
 SESSION_BIND="ctrl-s:change-prompt(sessions> )+reload(tmux list-sessions -F '#S')"
