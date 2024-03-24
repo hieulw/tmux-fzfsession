@@ -1,12 +1,15 @@
-<a href="https://www.joshmedeski.com/posts/smart-tmux-sessions-with-zoxide-and-fzf/" target="_blank">
+# Introducing Sesh 🎉
 
-![thumbnail](https://github.com/joshmedeski/t-smart-tmux-session-manager/blob/main/smart-tmux-sessions-with-zoxide-and-fzf.jpeg?raw=true)
+I've rewritten this project in Go and called it "sesh". It's more flexible and faster than the original script. I'm no longer maintaining this project. I'll leave it up for historical purposes, but I recommend you check out the new project.
 
-</a>
+[Check out sesh](https://github.com/joshmedeski/sesh)
 
 # t - the smart tmux session manager
 
 tmux is a powerful tool, but dealing with sessions can be painful. This script makes it easy to create and switch tmux sessions:
+
+<details>
+<summary>Documentation</summary>
 
 ## Prerequisites
 
@@ -15,7 +18,11 @@ tmux is a powerful tool, but dealing with sessions can be painful. This script m
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [fzf](https://github.com/junegunn/fzf) (>=0.35.0)
 
-```
+_Note: some users have had issues with fzf integration on tmux 3.2a where upon
+spawning fzf it would lock the tmux pane. Upgrading to 3.3a seems to be a viable
+workaround_ Check [#104](https://github.com/joshmedeski/t-smart-tmux-session-manager/issues/104)
+
+```sh
 brew install tmux zoxide fzf
 ```
 
@@ -428,3 +435,5 @@ Add the following line to your `wezterm.lua` inside the **keys** options
 </details>
 
 **Note:** These bindings are based off the default prefix, `ctrl+b` (which converts to `\x02`). If you changed your prefix, I recommend [watching my video](https://www.joshmedeski.com/posts/macos-keyboard-shortcuts-for-tmux/) which goes into depth how to customize your own keybindings in Alacritty.
+
+</details>
