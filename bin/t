@@ -77,7 +77,7 @@ PROMPT=$(get_fzf_prompt)
 
 get_fzf_find_binding() {
 	local fzf_find_binding
-	local fzf_find_binding_default='ctrl-f:change-prompt(find> )+reload(find ~ -maxdepth 3 -type d)'
+	local fzf_find_binding_default="ctrl-f:reload(fd -d3 -td . ~ | sd \"\$HOME/(.*)\/$\" '~/\$1')"
 	if [ "$TMUX_RUNNING" -eq 0 ]; then
 		fzf_find_binding="$(tmux show -gqv '@t-fzf-find-binding')"
 	fi
@@ -127,9 +127,9 @@ if [ "$BORDER_LABEL" = "" ]; then
 	BORDER_LABEL=$fzf_border_label_default
 fi
 
-HEADER=" ^s sessions ^x zoxide ^f find"
-SESSION_BIND="ctrl-s:change-prompt(sessions> )+reload(tmux list-sessions -F '#S')"
-ZOXIDE_BIND="ctrl-x:change-prompt(zoxide> )+reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
+HEADER="^s sessions ^x zoxide ^f find"
+SESSION_BIND="ctrl-s:reload(tmux list-sessions -F '#S')"
+ZOXIDE_BIND="ctrl-x:reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
 TAB_BIND="tab:down,btab:up"
 
 if [ $# -ge 1 ]; then # argument provided
@@ -211,7 +211,7 @@ else # argument not provided
 				--bind "$ZOXIDE_BIND" \
 				--border \
 				--border-label "$BORDER_LABEL" \
-				--header " ^x zoxide ^f find" \
+				--header "^x zoxide ^f find" \
 				--no-sort \
 				--prompt "$PROMPT"
 		)
